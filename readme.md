@@ -35,12 +35,12 @@ AJAX basics https://www.w3schools.com/xml/ajax_intro.asp
 
 ## Where do I find the API documentation?
 
-https://dog.ceo/dog-api/#breed and select /api/breed/{breed name}/images
+https://dog.ceo/dog-api/#breed and select /api/breed/{breed name}/images/random
 
 
 ## What is the API end point syntax?
 
-https://dog.ceo/api/breed/' + queryTarget + '/images,
+url: 'https://dog.ceo/api/breed/' + queryTarget + '/images/random',
 
 ## Do I need an API key?
 

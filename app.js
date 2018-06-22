@@ -10,7 +10,7 @@ function getDataFromApi(queryTarget) {
     // Step 2a - make the api call using the URL, dataType (JSON or JSONP), type (GET or POST)
     $.ajax({
             type: "GET",
-            url: 'https://dog.ceo/api/breed/' + queryTarget + '/images',
+            url: 'https://dog.ceo/api/breed/' + queryTarget + '/images/random',
             dataType: 'json',
         })
 
@@ -49,12 +49,8 @@ function displaySearchData(data) {
     else {
 
         //create an HTML results variable
-        let htmlOutput = "";
-        $.each(data.message, function (dataKey, dataValue) {
-            htmlOutput += "<li>";
-            htmlOutput += "<img src='" + dataValue + "'/>";
-            htmlOutput += "</li>";
-        });
+        let htmlOutput = "<li><img src='" + data.message + "'/></li>";
+
 
         //Step 3e - send the content of HTML results variable to the HTML - display them in the html page
         $('.js-search-results').html(htmlOutput);

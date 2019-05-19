@@ -1,58 +1,6 @@
 /* This app doesn't follow a11y best practices, and the JS file is incomplete. Complete the getDataFromApi and displaySearchData functions. When you're done, this app should allow a user to search for a specific dog breed, and display a random image of that dog breed. You should make requests to this API: https://dog.ceo/dog-api/ . Also make any necessary adjustments to make this app accessible. */
 
 
-
-//Step 2 - define the function to make the api call; shopkeeper goes to warehouse to get shoe
-function getDataFromApi(queryTarget) {
-
-    //create the url
-    const url = `https://dog.ceo/api/breed/${queryTarget}/images/random`;
-
-    // Step 2a - make the api call using the URL, dataType (JSON or JSONP), type (GET or POST)
-    fetch(url)
-
-        //Step 2b - success scenario (call the function to display the results)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error(response.statusText);
-        })
-        .then(responseJson => displaySearchData(responseJson))
-
-        // Step 2c - failure scenario (display errors)
-        .catch(err => {
-            $("#error-message").text(`Something went wrong: ${err.message}`);
-        });
-};
-
-
-//Step 3 - display the results; sales process
-function displaySearchData(data) {
-
-    //Step 3a - console.log the results
-    console.log(data);
-
-    //Step 3b - if there are no results show errors
-    if (data.message == "") {
-
-        //show and alert
-        alert("No results");
-    }
-
-    //Step 3c - if there are results
-    else {
-
-        //create an HTML results variable
-        let htmlOutput = "<li><img src='" + data.message + "'/></li>";
-
-
-        //Step 3e - send the content of HTML results variable to the HTML - display them in the html page
-        $('.js-search-results').html(htmlOutput);
-    }
-}
-
-
 //Step 1 - watch for user input; tell shopkeeper what shoe size, color
 function watchSubmit() {
 
@@ -72,11 +20,54 @@ function watchSubmit() {
             alert("Please select a breed");
         }
 
-
         //Step 1d - use the api function - use that input values to call the getResults function defined at the top
         getDataFromApi(queryTarget);
     });
 }
+
+//Step 2 - define the function to make the api call; shopkeeper goes to warehouse to get shoe
+function getDataFromApi(queryTarget) {
+
+    //Step 2a - create the url
+    const url = `https://dog.ceo/api/breed/${queryTarget}/images/random`;
+
+    // Step 2b - make the api call using the URL, dataType (JSON or JSONP), type (GET or POST)
+    fetch(url)
+
+        //Step 2c - success scenario (call the function to display the results)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response.statusText);
+        })
+        .then(responseJson => displaySearchData(responseJson))
+
+        // Step 2d - failure scenario (display errors)
+        .catch(err => {
+            $("#error-message").text(`Something went wrong: ${err.message}`);
+        });
+};
+
+
+//Step 3 - display the results; sales process
+function displaySearchData(data) {
+
+    //Step 3a - console.log the results
+    console.log(data);
+
+    //Step 3b - create an HTML results variable
+    let htmlOutput = "<li><img src='" + data.message + "'/></li>";
+
+    //Step 3c - send the content of HTML results variable to the HTML - display them in the html page
+    $('#js-search-results').html(htmlOutput);
+
+    // Step 3d - remove class hidden from the result container
+    $('#js-search-results').removeClass("hidden");
+}
+
+
+
 
 
 

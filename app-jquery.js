@@ -5,24 +5,29 @@
 //Step 2 - define the function to make the api call; shopkeeper goes to warehouse to get shoe
 function getDataFromApi(queryTarget) {
 
-    //create the url
-    const url = `https://dog.ceo/api/breed/${queryTarget}/images/random`;
+    //full AJAX intro https://www.w3schools.com/xml/ajax_intro.asp
 
     // Step 2a - make the api call using the URL, dataType (JSON or JSONP), type (GET or POST)
-    fetch(url)
+    $.ajax({
+            type: "GET",
+            url: 'https://dog.ceo/api/breed/' + queryTarget + '/images/random',
+            dataType: 'json',
+        })
 
         //Step 2b - success scenario (call the function to display the results)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error(response.statusText);
+        .done(function (dataOutput) {
+
+            //displays the external api json object in the console
+            displaySearchData(dataOutput);
         })
-        .then(responseJson => displaySearchData(responseJson))
 
         // Step 2c - failure scenario (display errors)
-        .catch(err => {
-            $("#error-message").text(`Something went wrong: ${err.message}`);
+        .fail(function (jqXHR, error, errorThrown) {
+
+            //display errors
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
         });
 };
 
@@ -63,9 +68,7 @@ function watchSubmit() {
         event.preventDefault();
 
         //Step 1b - get user input - get the value from the input box
-        let queryTarget = $('.js-query').val();
-
-        //console.log(queryTarget);
+        let queryTarget = $(event.currentTarget).find('.js-query').val();
 
         //Step 1c - input validation - validate input
         if (queryTarget == '') {

@@ -19,9 +19,11 @@ function watchSubmit() {
         if (queryTarget == '') {
             alert("Please select a breed");
         }
+        else {
+            //Step 1d - use the api function - use that input values to call the getResults function defined at the top
+            getDataFromApi(queryTarget);
+        }
 
-        //Step 1d - use the api function - use that input values to call the getResults function defined at the top
-        getDataFromApi(queryTarget);
     });
 }
 
@@ -30,7 +32,7 @@ function getDataFromApi(queryTarget) {
 
     //Step 2a - create the url
     const url = `https://dog.ceo/api/breed/${queryTarget}/images/random`;
-
+    console.log(url);
     // Step 2b - make the api call using the URL, dataType (JSON or JSONP), type (GET or POST)
     fetch(url)
 
@@ -45,7 +47,7 @@ function getDataFromApi(queryTarget) {
 
         // Step 2d - failure scenario (display errors)
         .catch(err => {
-            $("#error-message").text(`Something went wrong: ${err.message}`);
+            console.log(err);
         });
 };
 

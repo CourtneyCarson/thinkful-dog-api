@@ -53,13 +53,13 @@ function getDataFromApi(queryTarget) {
 
 
 //Step 3 - display the results; sales process
-function displaySearchData(data) {
+function displaySearchData(responseJson) {
 
     //Step 3a - console.log the results
-    console.log(data);
+    console.log(responseJson);
 
     //Step 3b - create an HTML results variable
-    let htmlOutput = "<li><img src='" + data.message + "'/></li>";
+    let htmlOutput = "<li><img src='" + responseJson.message + "'/></li>";
 
     //Step 3c - send the content of HTML results variable to the HTML - display them in the html page
     $('#js-search-results').html(htmlOutput);

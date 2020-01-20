@@ -5,7 +5,7 @@
 function watchSubmit() {
 
     //Step 1a - create a trigger
-    $(".js-search-form").submit(function (event) {
+    $(".js-search-form").submit(function(event) {
 
         //if the page refreshes when you submit the form use "preventDefault()" to force JavaScript to handle the form submission
         event.preventDefault();
@@ -18,8 +18,7 @@ function watchSubmit() {
         //Step 1c - input validation - validate input
         if (queryTarget == '') {
             alert("Please select a breed");
-        }
-        else {
+        } else {
             //Step 1d - use the api function - use that input values to call the getResults function defined at the top
             getDataFromApi(queryTarget);
         }
@@ -36,19 +35,20 @@ function getDataFromApi(queryTarget) {
     // Step 2b - make the api call using the URL, dataType (JSON or JSONP), type (GET or POST)
     fetch(url)
 
-        //Step 2c - success scenario (call the function to display the results)
-        .then(response => {
+    //Step 2c - success scenario (call the function to display the results)
+    .then(response => {
             if (response.ok) {
                 return response.json();
             }
+            // DISPLAY ERRORS if the server connection works but the json data is broken
             throw new Error(response.statusText);
         })
         .then(responseJson => displaySearchData(responseJson))
 
-        // Step 2d - failure scenario (display errors)
-        .catch(err => {
-            console.log(err);
-        });
+    // Step 2d - failure scenario  (DISPLAY ERRORS if the server connection fails)
+    .catch(err => {
+        console.log(err);
+    });
 };
 
 

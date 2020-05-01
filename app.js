@@ -59,7 +59,7 @@ function displaySearchData(responseJson) {
     console.log(responseJson);
 
     //Step 3b - create an HTML results variable
-    let htmlOutput = "<li><img src='" + responseJson.message + "'/></li>";
+    let htmlOutput = `<li><img src='${responseJson.message}' alt='Dog image'/></li>`;
 
     //Step 3c - send the content of HTML results variable to the HTML - display them in the html page
     $('#js-search-results').html(htmlOutput);
